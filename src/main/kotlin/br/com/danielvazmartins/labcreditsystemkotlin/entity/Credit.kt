@@ -15,7 +15,7 @@ import java.util.UUID
 @Entity()
 data class Credit(
     @Column(nullable = false, unique = true)
-    val creditCode: UUID = UUID.randomUUID(),
+    var creditCode: UUID = UUID.randomUUID(),
 
     @Column(nullable = false)
     val creditValue: BigDecimal = BigDecimal.ZERO,
@@ -24,13 +24,13 @@ data class Credit(
     val dayFirstInstallment: LocalDate,
 
     @Column(nullable = false)
-    val numberOfInstallment: Int = 0,
+    val numberOfInstallments: Int = 0,
 
     @Enumerated
-    val status: Status,
+    val status: Status = Status.IN_PROGRESS,
 
     @ManyToOne
-    val customer: Customer? = null,
+    var customer: Customer? = null,
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
